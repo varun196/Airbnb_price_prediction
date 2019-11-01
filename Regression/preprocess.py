@@ -1,24 +1,17 @@
-import numpy as np # linear algebra
-import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
-from sklearn.decomposition import PCA
-from sklearn.preprocessing import Imputer
-from sklearn.model_selection import KFold
-from sklearn import linear_model
-from sklearn.metrics import make_scorer
-from sklearn.ensemble import BaggingRegressor
-from sklearn.ensemble import RandomForestRegressor
-from sklearn import svm
-from sklearn.metrics import r2_score
-from sklearn.ensemble import AdaBoostRegressor
-from sklearn.model_selection import cross_val_score
-from sklearn.tree import DecisionTreeRegressor
-from sklearn.model_selection import GridSearchCV
-import matplotlib.pyplot as plt
-from sklearn.preprocessing import MultiLabelBinarizer
-from sklearn.preprocessing import MinMaxScaler
-from sklearn.model_selection import train_test_split
-from sklearn import metrics
 import pickle
+
+import matplotlib.pyplot as plt
+import numpy as np  # linear algebra
+import pandas as pd  # data processing, CSV file I/O (e.g. pd.read_csv)
+from sklearn import linear_model, metrics, svm
+from sklearn.decomposition import PCA
+from sklearn.ensemble import (AdaBoostRegressor, BaggingRegressor,
+                              RandomForestRegressor)
+from sklearn.metrics import make_scorer, r2_score
+from sklearn.model_selection import (GridSearchCV, KFold, cross_val_score,
+                                     train_test_split)
+from sklearn.preprocessing import Imputer, MinMaxScaler, MultiLabelBinarizer
+from sklearn.tree import DecisionTreeRegressor
 
 # Read data set
 data = pd.read_csv("../data/train.csv") 
@@ -60,4 +53,3 @@ data = data.fillna(data.median())
 
 with open("pickles/preprocessed_data.pkl","wb") as f:
     pickle.dump(data,f)
-

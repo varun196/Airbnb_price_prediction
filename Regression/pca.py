@@ -1,25 +1,18 @@
-import numpy as np # linear algebra
-import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
-from sklearn.decomposition import PCA
-from sklearn.preprocessing import Imputer
-from sklearn.model_selection import KFold
-from sklearn import linear_model
-from sklearn.metrics import make_scorer
-from sklearn.ensemble import BaggingRegressor
-from sklearn.ensemble import RandomForestRegressor
-from sklearn import svm
-from sklearn.metrics import r2_score
-from sklearn.ensemble import AdaBoostRegressor
-from sklearn.model_selection import cross_val_score
-from sklearn.tree import DecisionTreeRegressor
-from sklearn.model_selection import GridSearchCV
-import matplotlib.pyplot as plt
-from sklearn.preprocessing import MultiLabelBinarizer
-from sklearn.preprocessing import MinMaxScaler
-from sklearn.model_selection import train_test_split
-from sklearn import metrics
 import pickle
+
+import matplotlib.pyplot as plt
+import numpy as np  # linear algebra
+import pandas as pd  # data processing, CSV file I/O (e.g. pd.read_csv)
+from sklearn import linear_model, metrics, svm
+from sklearn.decomposition import PCA
+from sklearn.ensemble import (AdaBoostRegressor, BaggingRegressor,
+                              RandomForestRegressor)
 from sklearn.linear_model import LinearRegression
+from sklearn.metrics import make_scorer, r2_score
+from sklearn.model_selection import (GridSearchCV, KFold, cross_val_score,
+                                     train_test_split)
+from sklearn.preprocessing import Imputer, MinMaxScaler, MultiLabelBinarizer
+from sklearn.tree import DecisionTreeRegressor
 
 data = None
 with open("pickles/preprocessed_data.pkl","rb") as f:
@@ -34,8 +27,9 @@ data = (data - data.min())/(data.max() - data.min())
 # split data to train, test
 data_train, data_test, labels_train, labels_test = train_test_split(data, labels, test_size = 0.2, random_state=0)
 
-pca = PCA(0.99,whiten=True)  # 95% PCA component fitting
-data_train = pd.DataFrame(pca.fit_transform(data_train))
+pca = PCA(0.95,whiten=True)  # 95% PCA component fitting
+pca.fit(data)
+data_train = pd.DataFrame(pca.transform(data_train))
 data_test = pd.DataFrame(pca.transform(data_test))
 
 # Save
