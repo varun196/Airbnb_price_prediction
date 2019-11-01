@@ -18,7 +18,7 @@ Ensure tensorflow is installed:
 ENsure sklearn is installed:  
 `pip3 install sklearn`  
 
-Install seaborn:
+Install seaborn:  
 `pip3 install seaborn`  
 
 Install xgboost:  

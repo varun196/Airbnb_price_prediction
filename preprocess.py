@@ -14,7 +14,7 @@ from sklearn.preprocessing import Imputer, MinMaxScaler, MultiLabelBinarizer
 from sklearn.tree import DecisionTreeRegressor
 
 # Read data set
-data = pd.read_csv("../data/train.csv") 
+data = pd.read_csv("data/train.csv") 
 
 columns = ['id', 'city', 'zipcode', 'neighbourhood', 'description', 'name', 'thumbnail_url']
 data.drop(columns, inplace = True, axis=1)

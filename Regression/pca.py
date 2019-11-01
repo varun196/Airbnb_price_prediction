@@ -15,7 +15,7 @@ from sklearn.preprocessing import Imputer, MinMaxScaler, MultiLabelBinarizer
 from sklearn.tree import DecisionTreeRegressor
 
 data = None
-with open("pickles/preprocessed_data.pkl","rb") as f:
+with open("../pickles/preprocessed_data.pkl","rb") as f:
     data = pickle.load(f)
 
 labels = data['log_price']
@@ -33,6 +33,6 @@ data_train = pd.DataFrame(pca.transform(data_train))
 data_test = pd.DataFrame(pca.transform(data_test))
 
 # Save
-with open("pickles/pca_train_test.pkl","wb") as f:
+with open("../pickles/pca_train_test.pkl","wb") as f:
     lst = [data_train, data_test, labels_train, labels_test]
     pickle.dump(lst,f)
