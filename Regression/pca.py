@@ -15,7 +15,7 @@ from sklearn.preprocessing import Imputer, MinMaxScaler, MultiLabelBinarizer
 from sklearn.tree import DecisionTreeRegressor
 
 data = None
-with open("../pickles/preprocessed_data.pkl","rb") as f:
+with open("pickles/preprocessed_data.pkl","rb") as f:
     data = pickle.load(f)
 
 labels = data['log_price']
@@ -27,12 +27,20 @@ data = (data - data.min())/(data.max() - data.min())
 # split data to train, test
 data_train, data_test, labels_train, labels_test = train_test_split(data, labels, test_size = 0.2, random_state=0)
 
-pca = PCA(0.85,whiten=True)  # 95% PCA component fitting
+cov_matrix = data_train.cov()
+eigen_values,eigen_vectors = np.linalg.eig(cov_matrix)
+plt.plot(range(len(eigen_values)),eigen_values,alpha=0.7, color = "green")
+plt.xlabel("Principle Component")
+plt.ylabel("Eigen value")
+plt.title("Eigen Value Plot")
+plt.show()
+
+pca = PCA(n_components = 85)  # 95% PCA component fitting
 pca.fit(data)
 data_train = pd.DataFrame(pca.transform(data_train))
 data_test = pd.DataFrame(pca.transform(data_test))
 
 # Save
-with open("../pickles/pca_train_test.pkl","wb") as f:
+with open("pickles/pca_train_test.pkl","wb") as f:
     lst = [data_train, data_test, labels_train, labels_test]
     pickle.dump(lst,f)
