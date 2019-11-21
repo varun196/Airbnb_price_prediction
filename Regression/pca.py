@@ -27,7 +27,7 @@ data = (data - data.min())/(data.max() - data.min())
 # split data to train, test
 data_train, data_test, labels_train, labels_test = train_test_split(data, labels, test_size = 0.2, random_state=0)
 
-pca = PCA(0.95,whiten=True)  # 95% PCA component fitting
+pca = PCA(0.85,whiten=True)  # 95% PCA component fitting
 pca.fit(data)
 data_train = pd.DataFrame(pca.transform(data_train))
 data_test = pd.DataFrame(pca.transform(data_test))

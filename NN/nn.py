@@ -22,28 +22,33 @@ with open("../pickles/preprocessed_data.pkl","rb") as f:
 
 NN_model = Sequential()
 
-# The Input Layer :
-NN_model.add(Dense(128, kernel_initializer='normal',input_dim = data.shape[1]-1, activation='relu'))
-
 # The Hidden Layers :
-NN_model.add(Dense(256, kernel_initializer='normal',activation='relu'))
-NN_model.add(Dense(256, kernel_initializer='normal',activation='relu'))
-NN_model.add(Dense(256, kernel_initializer='normal',activation='relu'))
+NN_model.add(Dense(32, kernel_initializer='normal',input_dim = data.shape[1]-1, activation='relu'))
+NN_model.add(Dense(32, kernel_initializer='normal',activation='relu'))
+NN_model.add(Dense(32, kernel_initializer='normal',activation='relu'))
+NN_model.add(Dense(32, kernel_initializer='normal',activation='relu'))
+NN_model.add(Dense(32, kernel_initializer='normal',activation='relu'))
+NN_model.add(Dense(32, kernel_initializer='normal',activation='relu'))
+NN_model.add(Dense(32, kernel_initializer='normal',activation='relu'))
+NN_model.add(Dense(32, kernel_initializer='normal',activation='relu'))
+NN_model.add(Dense(32, kernel_initializer='normal',activation='relu'))
+NN_model.add(Dense(32, kernel_initializer='normal',activation='relu'))
+NN_model.add(Dense(32, kernel_initializer='normal',activation='linear'))
 
 # The Output Layer :
 NN_model.add(Dense(1, kernel_initializer='normal',activation='linear'))
 
 # Compile the network :
-NN_model.compile(loss='mean_absolute_error', optimizer='adam', metrics=['mean_absolute_error'])
+NN_model.compile(loss='mse', optimizer='adam', metrics=['mean_absolute_error'])
 NN_model.summary()
 
-checkpoint_name = 'Weights-{epoch:03d}--{val_loss:.5f}.hdf5' 
+checkpoint_name = '11x32_mse_-{epoch:03d}--{val_loss:.5f}.hdf5' 
 checkpoint = ModelCheckpoint(checkpoint_name, monitor='val_loss', verbose = 1, save_best_only = True, mode ='auto')
 callbacks_list = [checkpoint]
 
-NN_model.fit(data.drop('log_price', 1), data['log_price'], epochs=10, batch_size=32, validation_split = 0.2, callbacks=callbacks_list)
+NN_model.fit(data.drop('log_price', 1), data['log_price'], epochs=30, batch_size=32, validation_split = 0.2, callbacks=callbacks_list)
 
-# Load weights file of the best model :
-wights_file = input("Enter weights file") # choose the best checkpoint 
-NN_model.load_weights(wights_file) # load it
-NN_model.compile(loss='mean_absolute_error', optimizer='adam', metrics=['mean_absolute_error'])
+# # Load weights file of the best model :
+# wights_file = input("Enter weights file") # choose the best checkpoint 
+# NN_model.load_weights(wights_file) # load it
+# NN_model.compile(loss='mean_absolute_error', optimizer='adam', metrics=['mean_absolute_error'])
