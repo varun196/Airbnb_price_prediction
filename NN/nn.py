@@ -23,17 +23,17 @@ with open("../pickles/preprocessed_data.pkl","rb") as f:
 NN_model = Sequential()
 
 # The Hidden Layers :
-NN_model.add(Dense(32, kernel_initializer='normal',input_dim = data.shape[1]-1, activation='relu'))
-NN_model.add(Dense(32, kernel_initializer='normal',activation='relu'))
-NN_model.add(Dense(32, kernel_initializer='normal',activation='relu'))
-NN_model.add(Dense(32, kernel_initializer='normal',activation='relu'))
-NN_model.add(Dense(32, kernel_initializer='normal',activation='relu'))
-NN_model.add(Dense(32, kernel_initializer='normal',activation='relu'))
-NN_model.add(Dense(32, kernel_initializer='normal',activation='relu'))
-NN_model.add(Dense(32, kernel_initializer='normal',activation='relu'))
-NN_model.add(Dense(32, kernel_initializer='normal',activation='relu'))
-NN_model.add(Dense(32, kernel_initializer='normal',activation='relu'))
-NN_model.add(Dense(32, kernel_initializer='normal',activation='linear'))
+NN_model.add(Dense(128, kernel_initializer='normal',input_dim = data.shape[1]-1, activation='relu'))
+NN_model.add(Dense(128, kernel_initializer='normal',activation='relu'))
+NN_model.add(Dense(128, kernel_initializer='normal',activation='relu'))
+NN_model.add(Dense(128, kernel_initializer='normal',activation='relu'))
+NN_model.add(Dense(128, kernel_initializer='normal',activation='relu'))
+NN_model.add(Dense(128, kernel_initializer='normal',activation='relu'))
+NN_model.add(Dense(128, kernel_initializer='normal',activation='relu'))
+NN_model.add(Dense(128, kernel_initializer='normal',activation='relu'))
+NN_model.add(Dense(128, kernel_initializer='normal',activation='relu'))
+NN_model.add(Dense(128, kernel_initializer='normal',activation='relu'))
+NN_model.add(Dense(128, kernel_initializer='normal',activation='linear'))
 
 # The Output Layer :
 NN_model.add(Dense(1, kernel_initializer='normal',activation='linear'))
@@ -42,7 +42,7 @@ NN_model.add(Dense(1, kernel_initializer='normal',activation='linear'))
 NN_model.compile(loss='mse', optimizer='adam', metrics=['mean_absolute_error'])
 NN_model.summary()
 
-checkpoint_name = '11x32_mse_-{epoch:03d}--{val_loss:.5f}.hdf5' 
+checkpoint_name = '11x128_mse_-{epoch:03d}--{val_loss:.5f}.hdf5' 
 checkpoint = ModelCheckpoint(checkpoint_name, monitor='val_loss', verbose = 1, save_best_only = True, mode ='auto')
 callbacks_list = [checkpoint]
 
