@@ -16,7 +16,7 @@ from sklearn.tree import DecisionTreeRegressor
 # Read data set
 data = pd.read_csv("data/train.csv") 
 
-columns = ['id', 'city', 'zipcode', 'neighbourhood', 'description', 'name', 'thumbnail_url']
+columns = ['id', 'description', 'name', 'thumbnail_url', 'zipcode']
 data.drop(columns, inplace = True, axis=1)
 
 # Review date should not affect price.
@@ -36,7 +36,7 @@ def process_host_resp(s):
 data['host_response_rate'] = data['host_response_rate'].apply(process_host_resp)
 
 # One hot encoding - property type, room type, amenities, bed type, cancellations, 
-categorical=['property_type','room_type','bed_type','cancellation_policy']
+categorical=['property_type','room_type','bed_type','cancellation_policy', 'city', 'neighbourhood']      
 data = pd.get_dummies(data, columns=categorical)
 
 
@@ -51,5 +51,5 @@ data = data.join(pd.DataFrame(mlb.fit_transform(data.pop('amenities')),
 # Fill missing data with medians
 data = data.fillna(data.median())
 
-with open("pickles/preprocessed_data.pkl","wb") as f:
+with open("pickles/preprocessed_data_nn.pkl","wb") as f:
     pickle.dump(data,f)
