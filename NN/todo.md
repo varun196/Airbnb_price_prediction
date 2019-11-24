@@ -1,4 +1,6 @@
-- [ ] K-fold cv:
+- [x] Train-test split + plot + overfitting
+
+- [x] K-fold cv:
 ```
     def baseline_model():
         # create model
@@ -16,8 +18,9 @@
     kfold = KFold(n_splits=10)
     results = cross_val_score(pipeline, X, Y, cv=kfold)
 ```
-- [ ] "Deeper" network
-- [ ] "Wider" network
+- [x] "Deeper" network
+- [x] "Wider" network
 - [ ] Derived feature columns:   
 https://www.tensorflow.org/tutorials/estimator/linear#derived_feature_columns  
-- [ ] Rutvik -- graphs
+
+- [ ] "Feature vector" 

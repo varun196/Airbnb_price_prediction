@@ -2,17 +2,9 @@ from keras.callbacks import ModelCheckpoint
 from keras.models import Sequential
 from keras.layers import Dense, Activation, Flatten
 from sklearn.model_selection import train_test_split
-from sklearn.ensemble import RandomForestRegressor
-from sklearn.metrics import mean_absolute_error 
+from sklearn.metrics import mean_absolute_error
 from matplotlib import pyplot as plt
-import seaborn as sb
-import matplotlib.pyplot as plt
 import pandas as pd
-import numpy as np
-import warnings 
-warnings.filterwarnings('ignore')
-warnings.filterwarnings('ignore', category=DeprecationWarning)
-from xgboost import XGBRegressor
 import pickle
 
 data = None
@@ -20,7 +12,10 @@ data = None
 with open("../pickles/preprocessed_data_nn.pkl","rb") as f:
     data = pickle.load(f)
 
-print(data.head(5))
+X = data.drop('log_price', 1)
+y = data['log_price']
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33)
 
 NN_model = Sequential()
 
@@ -34,16 +29,17 @@ NN_model.add(Dense(32, kernel_initializer='normal',activation='linear'))
 NN_model.add(Dense(1, kernel_initializer='normal',activation='linear'))
 
 # Compile the network :
-NN_model.compile(loss='mse', optimizer='adam', metrics=['mse','mae'])
-NN_model.summary()
+hist = NN_model.compile(loss='mse', optimizer='adam', metrics=['mse','mae'])
+#NN_model.summary()
 
-checkpoint_name = '4x32_mse_mse_batch_1024_nn-{epoch:03d}--{val_loss:.5f}.hdf5' 
+checkpoint_name = 'checkpoints/asd-{epoch:03d}--{val_loss:.5f}.hdf5' 
 checkpoint = ModelCheckpoint(checkpoint_name, monitor='val_loss', verbose = 1, save_best_only = True, mode ='auto')
 callbacks_list = [checkpoint]
 
-NN_model.fit(data.drop('log_price', 1), data['log_price'], epochs=30, batch_size=32, validation_split = 0.2, callbacks=callbacks_list)
+NN_model.fit(X_train, y_train, epochs=30, batch_size=32, validation_split = 0.2, callbacks=callbacks_list)
 
-# # Load weights file of the best model :
-# wights_file = input("Enter weights file") # choose the best checkpoint 
-# NN_model.load_weights(wights_file) # load it
-# NN_model.compile(loss='mean_absolute_error', optimizer='adam', metrics=['mean_absolute_error'])
+# plot loss during training
+plt.title('Loss')
+plt.plot(hist.history['loss'], label='train')
+plt.plot(hist.history['val_loss'], label='val')
+plt.legend()
