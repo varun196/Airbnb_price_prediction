@@ -16,7 +16,7 @@ import pickle
 
 data = None
 
-with open("../pickles/preprocessed_data_nn.pkl","rb") as f:
+with open("../pickles/preprocessed_data.pkl","rb") as f:
     data = pickle.load(f)
 
 X = data.drop('log_price', 1)

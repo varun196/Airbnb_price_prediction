@@ -68,5 +68,5 @@ plt.ylabel("Eigen value")
 plt.title("Eigen Value Plot")
 plt.show()
 
-with open("pickles/preprocessed_data_nn.pkl","wb") as f:
+with open("pickles/preprocessed_data.pkl","wb") as f:
     pickle.dump(data,f)
