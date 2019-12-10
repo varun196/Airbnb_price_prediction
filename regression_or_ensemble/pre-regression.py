@@ -1,3 +1,8 @@
+data = None
+
+with open("../pickles/preprocessed_data.pkl","rb") as f:
+    data = pickle.load(f)
+
 labels = data['log_price']
 data = data.drop('log_price', 1)
 
