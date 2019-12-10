@@ -24,10 +24,11 @@ rf_test_list, rf_train_list, rf_r2_score = [], [], []
 kf, index = KFold(n_splits=10), 1
 train_error_rf, test_error_rf, r2_score_avg_rf = 0, 0, 0
 
-for train_index, test_index in kf.split(X):
+for train_index, test_index in kf.split(data):
   print("Round: ",str(index))
-  X_train, X_test, y_train, y_test = data.loc[train_index], data.loc[test_index], labels.loc[train_index], labels.loc[test_index]
- 
+  X_train, X_test = data.loc[train_index], data.loc[test_index]
+  y_train, y_test = labels.loc[train_index], labels.loc[test_index]
+
   print()
 
   train_mse_rf,test_mse_rf, r2_score_rf = randForest(X_train, X_test, y_train, y_test)
