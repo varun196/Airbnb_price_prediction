@@ -32,7 +32,7 @@ train_error_lasso, test_error_lasso, r2_score_avg_lasso = 0, 0, 0
 
 for train_index, test_index in kf.split(X):
   print("Round: ",str(index))
-  X_train, X_test, y_train, y_test = X.loc[train_index], X.loc[test_index], y.loc[train_index], y.loc[test_index]
+  X_train, X_test, y_train, y_test = data.loc[train_index], data.loc[test_index], labels.loc[train_index], labels.loc[test_index]
   
   print()
 
