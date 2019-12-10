@@ -30,9 +30,10 @@ lasso_test_list, lasso_train_list, lasso_r2_score = [], [], []
 kf, index = KFold(n_splits=10), 1
 train_error_lasso, test_error_lasso, r2_score_avg_lasso = 0, 0, 0
 
-for train_index, test_index in kf.split(X):
+for train_index, test_index in kf.split(data):
   print("Round: ",str(index))
-  X_train, X_test, y_train, y_test = data.loc[train_index], data.loc[test_index], labels.loc[train_index], labels.loc[test_index]
+  X_train, X_test = data.loc[train_index], data.loc[test_index]
+  y_train, y_test = labels.loc[train_index], labels.loc[test_index]
   
   print()
 
