@@ -1,3 +1,5 @@
+# Linear Regression and XGBoost
+
 To Run Linear Regression and XGBoost, run Google colab file at <br> https://colab.research.google.com/drive/1pfRdm-N1eoPIuwoZ9n78XqFojC-pthBA <br>
 (Accessible from NC State account) <br>
 <br>
@@ -10,3 +12,9 @@ The individual pieces of the code are present as follows: <br>
 2. pre-regression.py - contains code regarding PCA analysis and data normalization<br>
 3. linear_regression.py - contains function for multiple linear regression<br>
 4. xgboost.py -contains function for the xgboost<br>
+
+# Lasso, Ridge and Random Forest Regression
+
+To execute lasso, ridge and random forest regression, run the Python notebook, [a relative link](lasso_ridge_randomForest.ipynb).
+
+
